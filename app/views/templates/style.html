@@ -1,23 +1,73 @@
 <style>
-.c-title {
-    font-family: "Poppins", sans-serif;
-    font-weight: bold;
-}
-.c-text-collapse {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: justify;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
-img.c-footer-icon  {
-    width: 40%;
-}
-
-@media (max-width: 500px) {
-    img.c-footer-icon {
-        width: 70%;
+    /* Theme */
+    :root {
+        --dark: RGB(29, 31, 47);
+        --light: RGB(250, 250, 250);
+        --light-90: RGBA(250, 250, 250, 0.9);
+        --gray: #aaa;
+        --orange: RGB(254, 208, 120);
+        --orange-90: RGBA(254, 208, 120, 0.9);
+        --light-orange: RGB(250, 228, 181);
+        --light-orange-90: RGBA(250, 228, 181, 0.9);
     }
-}
+
+    .c-title {
+        font-family: "Poppins", sans-serif;
+        font-weight: bold;
+    }
+
+    .c-text-collapse {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: justify;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    body {
+        background: linear-gradient(180deg, white, var(--orange));
+    }
+
+    img.c-footer-icon {
+        width: 40%;
+    }
+
+    @media (max-width: 500px) {
+        img.c-footer-icon {
+            width: 70%;
+        }
+    }
+
+    /* Bootstrap class */
+    .btn {
+        background-color: var(--orange);
+    }
+
+    .btn:hover {
+        background-color: var(--light-orange);
+        border: 2px solid var(--orange);
+    }
+
+    .text-waring {
+        font-weight: bold;
+        color: var(--orange);
+    }
+
+    .text-success {
+        font-weight: bold;
+    }
+
+    /*  Swiper js configuration  */
+    .swiper {
+        width: 80%;
+        height: 80vh;
+    }
+
+    .swiper-slide {
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        border-radius: 15px;
+    }
 </style>

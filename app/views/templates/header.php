@@ -10,9 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/bc63c5ed9f.js" crossorigin="anonymous"></script>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <title>PG Bee</title>
     <link rel="shortcut icon" href="app/views/home/img/pgbee.png">
-    <script src="https://kit.fontawesome.com/bc63c5ed9f.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <!--Navbar-->
@@ -46,9 +51,9 @@
                         echo '<a class="btn btn-dark me-3 px-3 py-1" href="/order_list">Order History</a>';
                     }
                     echo '
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#ordersModal" class="btn btn-primary me-3" id="orderListButton"><i class="fa-solid fa-file-invoice-dollar"></i></button>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#cartModal" class="btn btn-primary me-3" id="cartButton"><i class="fa-solid fa-cart-plus"></i></button>
-                        <a class="fw-bold text-decoration-none me-3" data-bs-toggle="collapse" href="#popUp" role="button" aria-expanded="false" aria-controls="popUp">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#ordersModal" class="btn me-3" id="orderListButton"><i class="fa-solid fa-file-invoice-dollar"></i></button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#cartModal" class="btn me-3" id="cartButton"><i class="fa-solid fa-cart-plus"></i></button>
+                        <a class="fw-bold text-decoration-none me-3 text-dark" data-bs-toggle="collapse" href="#popUp" role="button" aria-expanded="false" aria-controls="popUp">
                             Hello, ' . $_SESSION['user']['user_name'] . '
                         </a>
                         <div class="collapse" id="popUp">

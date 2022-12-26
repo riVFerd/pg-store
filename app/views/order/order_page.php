@@ -1,9 +1,25 @@
+<!-- Slider main container -->
+<div class="swiper pt-5 mt-5">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev" style="color: var(--dark);"></div>
+    <div class="swiper-button-next" style="color: var(--dark);"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+</div>
+
 <!--main content for order page-->
-<div class="container pt-5 mt-5">
-    <div class="row">
+<div class="container pt-3 mt-3">
+    <div class="row sticky-top" style="top: 84px;">
         <div class="col-3">
-            <input class="form-control me-2 " type="search" placeholder="Search Products" aria-label="Search"
-                   id="searchButton">
+            <input class="form-control me-2" type="search" style="box-shadow: 0 0 10px #aaaaaa" placeholder="Search Products" aria-label="Search" id="searchButton">
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 my-3 justify-content-around" id="productList">
@@ -25,7 +41,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <h5 class="fw-bold">Total : Rp <span id="totalPrice"></span></h5>
-                <button type="button" class="btn btn-primary" id="checkButton" data-bs-toggle="modal"
+                <button type="button" class="btn" id="checkButton" data-bs-toggle="modal"
                         data-bs-target="#checkoutConfirmModal">Checkout
                 </button>
             </div>
@@ -64,7 +80,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-primary" id="checkoutButton">Checkout</button>
+                <button type="button" class="btn" id="checkoutButton">Checkout</button>
             </div>
         </div>
     </div>
@@ -114,7 +130,6 @@
     </div>
 </div>
 
-
 <script>
     $(document).ready(function () {
         $('.loading').css('display', 'none');
@@ -130,12 +145,35 @@
                         <h5 class="card-title">${products[i].product_name}</h5>
                         <p class="card-text c-text-collapse">${products[i].product_desc}</p>
                         <h5 class="card-title mb-3">Rp ${(parseInt(products[i].product_price).toLocaleString()).replace(',', '.')}</h5>
-                        <button value="${products[i].product_id}" class="btn btn-primary w-100 addToCartButton">Add to cart</button>
+                        <button value="${products[i].product_id}" class="btn w-100 addToCartButton fw-bold">Add to cart</button>
                       </div>
                     </div>
                 </div>
             `);
+            let color = ['RGB(254, 208, 120)', 'RGB(250, 228, 181)', 'RGB(245, 228, 201)'];
+            $('.swiper-wrapper').append(`
+                <div class="swiper-slide" style="background-image: url('app/assets/product_images/${products[i].product_img}'); background-color: ${color[Math.floor(Math.random()*color.length)]}"></div>
+            `);
         }
+
+        // initialize swiper js
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            loop: true,
+            effect: 'cards',
+            grabCursor: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
 
         // Start add to cart button listener
         setAddCartListener();
@@ -246,15 +284,15 @@
                                     : `<p class="mb-0 text-success"><span class="text-black fw-bold">Status :</span> Success</p>`
                                             }
                                           </div>
-                                          <div class="row justify-content-between align-items-baseline px-3">
+                                          <div class="row justify-content-between align-items-baseline px-3 mt-3">
                                               <div class="col justify-content-start d-flex">
                                                   <p class="text-nowrap">${order.order_date}</p>
                                               </div>
                                               <div class="col justify-content-end d-flex">
-                                                <button onclick="showDetailModal(${order.order_id})" class="btn btn-info me-3" data-bs-toggle="modal" data-bs-target="#detailModal">info</button>
                                                   ${
-                                (order.order_status === 0) ? `<button onclick="payOrder(${order.order_id})" class="btn btn-success">Pay</button>` : ''
+                                (order.order_status === 0) ? `<button onclick="payOrder(${order.order_id})" class="btn me-3" style="background: #157347; color: white;"><i class="fa-solid fa-money-check-dollar me-2"></i>Pay</button>` : ''
                                                 }
+                                                <button onclick="showDetailModal(${order.order_id})" class="btn" data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fa-solid fa-circle-info"></i></button>
                                               </div>
                                           </div>
                                         </div>
@@ -266,6 +304,7 @@
             });
         });
 
+        // search listener
         $('#searchButton').keyup(function () {
             let keyword = $(this).val();
             $.ajax({
@@ -284,7 +323,7 @@
                                     <h5 class="card-title">${products[i].product_name}</h5>
                                     <p class="card-text c-text-collapse">${products[i].product_desc}</p>
                                     <h5 class="card-title mb-3">Rp ${(parseInt(products[i].product_price).toLocaleString()).replace(',', '.')}</h5>
-                                    <button value="${products[i].product_id}" class="btn btn-primary w-100 addToCartButton">Add to cart</button>
+                                    <button value="${products[i].product_id}" class="btn w-100 addToCartButton fw-bold">Add to cart</button>
                                   </div>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 <!--footer-->
-<div class="container-fluid bg-secondary pt-5">
+<div class="container-fluid bg-light pt-5">
     <div class="row text-center mb-3">
         <div class="col">
             <img style="max-height: 4rem" src="app/views/home/img/pgbee.png" alt="logo">

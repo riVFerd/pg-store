@@ -64,33 +64,3 @@ Router::add_post('/cart/plus', CartController::class, 'plus');
 Router::add_post('/cart/minus', CartController::class, 'minus');
 
 Router::run();
-
-//Just in case my router doesn't work, use this simple router implementation
-//switch ($path) {
-//    case '/':
-//        require 'app/views/home/home.php';
-//        break;
-//    case '/products':
-//        $products = new Products();
-//        $products = $products->getAll();
-//        View::render('products/products', ['products' => $products]);
-//        break;
-//    case '/products/input':
-//        View::render('products/input_products');
-//        break;
-//    case '/products/save':
-//        $products = new Products();
-//        $products->insert([
-//            'id' => 'DEFAULT',
-//            'name' => $_POST['product_name'],
-//            'description' => $_POST['product_desc'],
-//            'stock' => $_POST['product_stock'],
-//            'img' => 'masih belum di set',
-//            'price' => $_POST['product_price']
-//        ]);
-//        header('Location: /products');
-//        break;
-//    default:
-//        http_response_code(404);
-//        exit('Not Found');
-//}

@@ -11,7 +11,6 @@
     </div>
 </div>
 
-
 <!-- Cart Modal -->
 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -66,6 +65,43 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-primary" id="checkoutButton">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Order Detail Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="detailModalLabel">Order id : <span id="orderId"></span></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row text-center fw-bold">
+                        <div class="col">
+                            <p>Product Name</p>
+                        </div>
+                        <div class="col">
+                            <p>Price (each)</p>
+                        </div>
+                        <div class="col">
+                            <p>Quantity</p>
+                        </div>
+                        <div class="col">
+                            <p>Price total</p>
+                        </div>
+                    </div>
+                    <div id="detailProductList" class="text-center">
+                        <!-- Product list detail goes here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <h5>Total price amount : <span id="priceAmount"></span></h5>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -208,16 +244,17 @@
                                 (order.order_status === 0)
                                     ? `<p class="mb-0 text-warning"><span class="text-black fw-bold">Status :</span> Pending, waiting for your payment</p>`
                                     : `<p class="mb-0 text-success"><span class="text-black fw-bold">Status :</span> Success</p>`
-                            }
+                                            }
                                           </div>
                                           <div class="row justify-content-between align-items-baseline px-3">
                                               <div class="col justify-content-start d-flex">
                                                   <p class="text-nowrap">${order.order_date}</p>
                                               </div>
                                               <div class="col justify-content-end d-flex">
+                                                <button onclick="showDetailModal(${order.order_id})" class="btn btn-info me-3" data-bs-toggle="modal" data-bs-target="#detailModal">info</button>
                                                   ${
                                 (order.order_status === 0) ? `<button onclick="payOrder(${order.order_id})" class="btn btn-success">Pay</button>` : ''
-                            }
+                                                }
                                               </div>
                                           </div>
                                         </div>
@@ -225,17 +262,6 @@
                         );
 
                     });
-                }
-            });
-        });
-
-        $('#logoutButton').click(function () {
-            $.ajax({
-                url: '/user/login/delete_session',
-                type: 'POST',
-                success: function (response) {
-                    alert(response);
-                    window.location.reload();
                 }
             });
         });
@@ -253,7 +279,7 @@
                         $('#productList').append(`
                             <div class="col mb-3 d-flex justify-content-center">
                                 <div class="card h-100" style="max-width: 18rem; min-width: 18rem; min-height: 29rem;">
-                                  <img src="app/assets/product_images/${products[i].product_img}" class="card-img-top mx-auto d-block" style="max-height: 14rem; object-fit: contain; alt="...">
+                                  <img src="app/assets/product_images/${products[i].product_img}" class="card-img-top mx-auto d-block" style="max-height: 14rem; object-fit: contain; alt="product_image">
                                   <div class="card-body">
                                     <h5 class="card-title">${products[i].product_name}</h5>
                                     <p class="card-text c-text-collapse">${products[i].product_desc}</p>
@@ -400,6 +426,43 @@
                 alert(JSON.parse(response).message);
                 window.location.href = '/payment?order_id=' + order_id;
                 $('.loading').css('display', 'none');
+            }
+        });
+    }
+
+    function showDetailModal(order_id) {
+        console.log('showdetailmodal here');
+        let orderId = order_id;
+        $('#detailModal #orderId').html(orderId);
+        $('#detailProductList').empty();
+        $.ajax({
+            url: '/order_item/get_products_by_order?order_id=' + orderId,
+            method: 'GET',
+            success: function (response) {
+                products = JSON.parse(response);
+                let priceAmount = 0;
+                products.forEach((product) => {
+                    console.log(product);
+                    let tempHtml = `
+                        <div class="row">
+                            <div class="col">
+                                <p>${product.product_name}</p>
+                            </div>
+                            <div class="col">
+                                <p>${(parseInt(product.product_price).toLocaleString()).replace(',', '.')}</p>
+                            </div>
+                            <div class="col">
+                                <p>${product.order_item_quantity}</p>
+                            </div>
+                            <div class="col">
+                                <p>${(parseInt(product.order_item_price).toLocaleString()).replace(',', '.')}</p>
+                            </div>
+                        </div>
+                        `;
+                    $('#detailProductList').append(tempHtml);
+                    priceAmount += parseInt(product.order_item_price);
+                });
+                $('#priceAmount').html((priceAmount.toLocaleString()).replace(',', '.'));
             }
         });
     }

@@ -7,11 +7,14 @@
     </div>
     <div class="row justify-content-center mb-3">
         <div class="col-1 text-center px-0">
-            <img src="app/views/home/img/ig.png" onerror="this.src='../app/views/home/img/ig.png'" class="c-footer-icon"></div>
+            <img src="app/views/home/img/ig.png" onerror="this.src='../app/views/home/img/ig.png'"
+                 class="c-footer-icon"></div>
         <div class="col-1 text-center px-0">
-            <img src="app/views/home/img/weibo.png" onerror="this.src='../app/views/home/img/weibo.png'" class="c-footer-icon"></div>
+            <img src="app/views/home/img/weibo.png" onerror="this.src='../app/views/home/img/weibo.png'"
+                 class="c-footer-icon"></div>
         <div class="col-1 text-center px-0">
-            <img src="app/views/home/img/fb.png" onerror="this.src='../app/views/home/img/fb.png'" class="c-footer-icon"></div>
+            <img src="app/views/home/img/fb.png" onerror="this.src='../app/views/home/img/fb.png'"
+                 class="c-footer-icon"></div>
     </div>
     <div class="row">
         <div class="col">
@@ -25,6 +28,19 @@
 <script>
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
+    $(document).ready(function () {
+        $('#logoutButton').click(function () {
+            $.ajax({
+                url: '/user/login/delete_session',
+                type: 'POST',
+                success: function (response) {
+                    alert(response);
+                    window.location.reload();
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>

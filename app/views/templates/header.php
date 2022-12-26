@@ -42,8 +42,8 @@
             <div class="d-flex align-items-center">
                 <?php
                 if (!isset($_SESSION['user'])) {
-                    echo '<a class="btn btn-dark mx-3 px-3 py-1" href="/user/login">Login</a>';
-                    echo '<a class="btn btn-light border border-2 text-nowrap me-3s px-3 py-1" href="/user/signup">Sign Up</a>';
+                    echo '<a class="btn btn-dark mx-3 px-3 py-1 fw-bold" href="/user/login">Login</a>';
+                    echo '<a class="btn btn-light border border-2 text-nowrap me-3s px-3 py-1 fw-bold" href="/user/signup">Sign Up</a>';
                 } else {
                     if ($_SESSION['user']['user_role'] == 1) {
                         echo '<a class="btn btn-dark me-3 px-3 py-1" href="/products">Products</a>';

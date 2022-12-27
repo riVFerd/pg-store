@@ -40,11 +40,12 @@ class OrderController
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'pgbee.honeystore@gmail.com';
-        $mail->Password = 'bolgnqlgnpmsznsr';
+        $mail->Username = 'pgbee.honey@gmail.com';
+        $mail->Password = 'rgazebrwmsehjfqb';
+//        $mail->Password = 'bolgnqlgnpmsznsr';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
-        $mail->setFrom('pgbee.honeystore@gmail.com');
+        $mail->setFrom('pgbee.honey@gmail.com');
         $mail->addAddress($_SESSION['user']['user_email']);
         $mail->isHTML(true);
         $mail->Subject = 'Order Confirmation';

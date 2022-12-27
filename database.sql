@@ -1,6 +1,6 @@
-CREATE DATABASE  db_pghoney_test;
+CREATE DATABASE db_pghoney;
 
-USE db_pghoney_test;
+USE db_pghoney;
 
 CREATE TABLE products (
     product_id INT AUTO_INCREMENT PRIMARY KEY ,
